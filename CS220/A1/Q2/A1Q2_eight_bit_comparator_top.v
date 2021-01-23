@@ -57,7 +57,7 @@ module eight_bit_comparator_top;
 	initial begin
 		$dumpfile("comp.vcd");
 		$dumpvars(-1, eight_bit_comparator_top);
-		$monitor("Time = %0t \t, A = %b, B = %b, less = %b, equal = %b, greater = %b , Test ID = %0d", $time, A, B, less, equal, greater, test_id);
+		$monitor("Time = %0t \t, A = %b, B = %b, less = %b, equal = %b, greater = %b", $time, A, B, less, equal, greater);
 	end
 	*/
 endmodule
