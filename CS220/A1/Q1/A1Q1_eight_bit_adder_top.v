@@ -9,35 +9,44 @@ module eight_bit_adder_top;
 
    eight_bit_adder ADDER (A, B, Cin, Sum, Carry);
 
-   always @ (A or B or Cin) begin
-       $display("time: %d, %d + %d + %b = %d, carry = %b\n", $time, A, B, Cin, Sum, Carry);
+   always @ (A or B or Cin or Sum or Carry) begin
+       $display("time = %d, %d + %d + %b = %d, carry = %b", $time, A, B, Cin, Sum, Carry);
    end
 
    initial begin
-       #100
+       #10
        $finish;
    end
 
    initial begin
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h12; B = 8'h23; Cin = 0;
-       #5
-       A = 8'haf; B = 8'h01; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
-       #5
-       A = 8'h00; B = 8'h00; Cin = 0;
+      A = 100; B = 100; Cin = 1;
+      #1
+      $display("\n");
+      A = 200; B = 200; Cin = 0;
+      #1
+      $display("\n");
+      A = 20; B = 200; Cin = 0;
+      #1
+      $display("\n");
+      A = 24; B = 78; Cin = 1;
+      #1
+      $display("\n");
+      A = 223; B = 219; Cin = 0;
+      #1
+      $display("\n");
+      A = 255; B = 255; Cin = 1;
+      #1
+      $display("\n");
+      A = 0; B = 0; Cin = 0;
+      #1
+      $display("\n");
+      A = 43; B = 89; Cin = 0;
+      #1
+      $display("\n");
+      A = 128; B = 127; Cin = 1;
+      #1
+      $display("\n");
+      A = 56; B = 200; Cin = 0;
    end
 
 endmodule
