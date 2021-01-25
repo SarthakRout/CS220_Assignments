@@ -12,6 +12,11 @@ module eight_bit_comparator_top;
 	//Declare eight bit comparator module instantiation
 	eight_bit_comparator comp(A, B, less, equal, greater);
 
+	always @(A or B or less or equal or greater)
+		begin
+			$display("Time = %0t \tA = %b = %d, B = %b = %d, A < B = %b, A = B = %b, A > B = %b", $time, A, A, B, B, less, equal, greater);
+		end
+
 	//To specify finishing time
 	initial
 		begin
@@ -26,34 +31,34 @@ module eight_bit_comparator_top;
 			//default values: 
 			A = 0; B = 0;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b00001011; B = 8'b00000111; 
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b10001011; B = 8'b00000111; 
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b00001010; B = 8'b00001010;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b00001010; B = 8'b00000101;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b00000000; B = 8'b11111111;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b10101011; B = 8'b10101010;
 			#1 
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b10101010; B = 8'b10101011;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b10010101; B = 8'b11010000;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			A = 8'b10001011; B = 8'b10001011;
 			#1
-			$display("Time = %0t \tA = %b = %d, B = %b = %d, less = %b, equal = %b, greater = %b", $time, A, A, B, B, less, equal, greater);
+			$display("\n");
 			
 		end
 
