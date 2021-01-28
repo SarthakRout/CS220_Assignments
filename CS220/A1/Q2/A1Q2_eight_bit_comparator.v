@@ -3,10 +3,12 @@
 `include "A1Q2_one_bit_comparator.v"
 
 // Module declaration
-module eight_bit_comparator(A, B, less, equal, greater);
+module eight_bit_comparator(A, B, lin, ein, gin,  less, equal, greater);
 	
 	input [7:0] A;
 	input [7:0] B;
+
+	input lin, ein, gin;
 
 	output wire less, equal, greater;
 
@@ -15,7 +17,7 @@ module eight_bit_comparator(A, B, less, equal, greater);
 	wire [7:0] greater_8;
 
 	// One bit comparator for MSB (7th) position
-	one_bit_comparator c7(A[7], B[7], 1'b0, 1'b1, 1'b0, less_8[7], equal_8[7], greater_8[7]);
+	one_bit_comparator c7(A[7], B[7], lin, ein, gin, less_8[7], equal_8[7], greater_8[7]);
 	one_bit_comparator c6(A[6], B[6], less_8[7], equal_8[7], greater_8[7], less_8[6], equal_8[6], greater_8[6]);
 	one_bit_comparator c5(A[5], B[5], less_8[6], equal_8[6], greater_8[6], less_8[5], equal_8[5], greater_8[5]);
 	one_bit_comparator c4(A[4], B[4], less_8[5], equal_8[5], greater_8[5], less_8[4], equal_8[4], greater_8[4]);
