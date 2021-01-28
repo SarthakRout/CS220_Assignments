@@ -1,12 +1,15 @@
+// module for one bit adder
 module one_bit_full_adder (a, b, cin, sum, cout);
 
-   input a;
-   input b;
-   input cin;
+   // inputs
+   input a;    // first operand bit
+   input b;    // second operand bit
+   input cin;  // carry in bit
 
-   output sum;
+   // outputs
+   output sum;    // final sum bit
    wire sum;
-   output cout;
+   output cout;   // carry out bit
    wire cout;
 
    assign sum = a^b^cin;

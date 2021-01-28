@@ -1,7 +1,5 @@
 // Module for 8 bit comparator
 
-`include "A1Q2_one_bit_comparator.v"
-
 // Module declaration
 module eight_bit_comparator(A, B, lin, ein, gin,  less, equal, greater);
 	

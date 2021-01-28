@@ -1,7 +1,5 @@
 // Top Module for 8 bit comparator file
 
-`include "A1Q2_eight_bit_comparator.v"
-
 // Module Declaration
 module eight_bit_comparator_top;
 	

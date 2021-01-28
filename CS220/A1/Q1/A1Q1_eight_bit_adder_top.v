@@ -1,11 +1,12 @@
+// module using eight bit adder
 module eight_bit_adder_top;
 
-   reg [7:0] A;
-   reg [7:0] B;
-   reg Cin;
+   reg [7:0] A; // stored 1st 8-bit operand
+   reg [7:0] B; // stores 2nd 8-bit operand
+   reg Cin;     // carry-in bit
 
-   wire [7:0] Sum;
-   wire Carry;
+   wire [7:0] Sum;  // contains final sum
+   wire Carry;      // contains carry over
 
    eight_bit_adder ADDER (A, B, Cin, Sum, Carry);
 
@@ -18,6 +19,7 @@ module eight_bit_adder_top;
        $finish;
    end
 
+    // testing the 8-bit adder with 10 test cases. 
    initial begin
       A = 100; B = 100; Cin = 1;
       #1
