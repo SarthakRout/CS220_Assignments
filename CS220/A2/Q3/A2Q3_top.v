@@ -4,12 +4,11 @@ module top_module();
 	
 	reg clk;
 	wire out;
-	integer cycle;
 	M toggle(clk, out);
 
 	always @(out)
 		begin
-			$display("Time: %7d\tCycles: %6d\tOutput: %b", $time, (cycle>>1), out);
+			$display("Time: %7d\tOutput: %b", $time,  out);
 		end
 
 	initial
@@ -20,10 +19,9 @@ module top_module();
 	initial
 		begin
 			clk = 1;
-			cycle = 0;
 			repeat(620000)
 				begin
-					#5 clk = !clk; cycle = cycle + 1;
+					#5 clk = !clk;
 				end
 		end
 
