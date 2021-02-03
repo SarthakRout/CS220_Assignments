@@ -8,16 +8,16 @@ module rotate_top;
     end
 
     initial begin
-        #310000 $finish;
+        #3100000 $finish;
     end
 
     initial begin
         forever begin
-            clk = 0;
-            #5
             clk = 1;
             #5
             clk = 0;
+            #5
+            clk = 1;
         end
     end
 endmodule

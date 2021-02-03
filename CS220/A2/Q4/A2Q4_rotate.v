@@ -1,20 +1,26 @@
-`define TICK #25000
-
 module M(out, clk);
     input clk;
-    output wire [3:0] out;
-    reg [3:0] rotator;
+    output reg [3:0] out;
+    reg [20:0] counter;
 
-    assign out = rotator;
+    initial begin 
+        out = 4'b1000;
+        counter = 0;
+    end
 
     always @(posedge clk) begin
-        rotator[1] <= `TICK rotator[0];
-        rotator[2] <= `TICK rotator[1];
-        rotator[3] <= `TICK rotator[2];
-        rotator[0] <= `TICK rotator[3];
+        if (counter == 20'd25000)
+            begin
+                counter <= 1;
+                out[1] <= out[0];
+                out[2] <= out[1];
+                out[3] <= out[2];
+                out[0] <= out[3];
+            end
+        else
+            begin
+                counter <= counter + 1;
+            end
     end
 
-    initial begin
-        rotator = 4'b1000;
-    end
 endmodule
