@@ -1,11 +1,13 @@
+// module for rotating signal.
+
 module M(out, clk);
     input clk;
     output reg [3:0] out;
     reg [20:0] counter;
 
     initial begin 
-        out = 4'b1000;
-        counter = 0;
+        out = 4'b1000;  // contains final output.
+        counter = 0;    // counter to count clock cycles upto 25000
     end
 
     always @(posedge clk) begin
