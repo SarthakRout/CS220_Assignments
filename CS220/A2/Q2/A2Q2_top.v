@@ -1,3 +1,5 @@
+// top module for testing priority encoder
+
 module priority_encoder8to3_top;
     reg [7:0] inp;
     wire [2:0] out;
@@ -13,6 +15,7 @@ module priority_encoder8to3_top;
         $finish;
     end
 
+    // 10 test cases with gap of 1 cycle.
     initial begin
         inp = 8'b00100000;
         #1
@@ -36,5 +39,11 @@ module priority_encoder8to3_top;
         #1
         $display("\n");
         inp = 8'b10000000;
+        #1
+        $display("\n");
+        inp = 8'b00001000;
+        #1
+        $display("\n");
+        inp = 8'b10110010;
     end
 endmodule
