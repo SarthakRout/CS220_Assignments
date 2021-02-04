@@ -1,4 +1,4 @@
-// top module for testing priority encoder
+// Top module for testing priority encoder
 
 module priority_encoder8to3_top;
     reg [7:0] inp;
@@ -7,7 +7,7 @@ module priority_encoder8to3_top;
     priority_encoder8to3 ENCODER (inp, out);
 
     always @(inp or out) begin
-        $display("time = %d, %b = %d", $time, inp, out);
+        $display("time = %0d, Input: %b Output: %d = %b", $time, inp, out, out);
     end
 
     initial begin
