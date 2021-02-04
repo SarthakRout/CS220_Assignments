@@ -2,9 +2,9 @@
 
 module top_module();
 	
-	reg clk;
-	wire out;
-	M toggle(clk, out);
+	reg clk; 							//1-bit register storing the value of clock
+	wire out;							//1-bit wire for taking output of blinker
+	M blinker(clk, out);
 
 	always @(out)
 		begin
@@ -13,7 +13,7 @@ module top_module();
 
 	initial
 		begin
-			#3100000 $finish;
+			#3100000 $finish; 			//3,10,000 clock cycles with each cycle of 10 time units.
 		end
 
 	initial
@@ -21,7 +21,7 @@ module top_module();
 			clk = 1;
 			repeat(620000)
 				begin
-					#5 clk = !clk;
+					#5 clk = ~clk;		//Implementation of clock with 50% duty cycle and period of 10.
 				end
 		end
 

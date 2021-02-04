@@ -2,9 +2,9 @@
 
 module top_module();
 	
-	reg [2:0] dec_in;
-	wire [7:0] dec_out__enc_in;
-	wire [2:0] enc_out;
+	reg [2:0] dec_in;					// 3-bit bus input of decoder
+	wire [7:0] dec_out__enc_in; 		// Common 8-bit bus connecting output of decoder to input of encoder
+	wire [2:0] enc_out;					// 3-bit bus output of encoder
 
 	decoder3to8 dec(dec_in, dec_out__enc_in);
 
@@ -17,12 +17,12 @@ module top_module();
 
 	initial
 		begin
-			#10 $finish;
+			#10 $finish; 				// Simulation running for 10 time units.
 		end
 
 	initial
 		begin
-			dec_in = 3'b000;
+			dec_in = 3'b000;			// 8 test cases
 			$display("\n");
 			#1
 			dec_in = 3'b001;

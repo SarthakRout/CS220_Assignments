@@ -1,11 +1,11 @@
-// Module M
+// Module M as blinker
 
 module M(clk, out);
 	
-	input clk;
-	output wire out;
-	reg [20:0] counter;
-	reg value;
+	input clk; 							//1-bit clock input
+	output wire out;					//1-bit output
+	reg [20:0] counter;					//21-bit register counting clock posedge independent of time period
+	reg value;							//1-bit register storing current value of blinker
 
 	assign out = value;
 
@@ -13,8 +13,8 @@ module M(clk, out);
 		begin
 			if (counter == 20'd25000)
 				begin
-					counter <= 1;
-					value <= ~value;
+					counter <= 1; 		//Reseting counter to 1
+					value <= ~value;	//Toggling the register value
 				end
 			else
 				begin
