@@ -1,0 +1,34 @@
+#8 
+			row_num = 4'b1010;
+			input_valid = 1;
+			#10
+			row_num = 4'b1010;
+			input_valid = 0;
+			#10
+			row_num = 4'b1010;
+			input_valid = 0;
+
+			#10
+			row_num = 4'b1001;
+			input_valid = 1;
+			#10
+			row_num = 4'b1001;
+			input_valid = 0;
+			#10
+			row_num = 4'b1001;
+			input_valid = 0;
+
+			#10
+			row_num = 4'b0011;
+			input_valid = 1;
+			#10
+			row_num = 4'b0011;
+			input_valid = 0;
+			#10
+			row_num = 4'b0011;
+			input_valid = 0;
+
+
+//$monitor("Time = %0d, Row_Num: %b, Open_Row: %b, Output_Valid: %b, Counter: %b", $time, row_num, open_row_num, output_valid, counter);
+
+					//$display("%3d, %b", $time, output_valid);
