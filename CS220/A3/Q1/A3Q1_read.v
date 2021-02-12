@@ -48,7 +48,7 @@ module BANK(clk, input_valid, row_num, output_valid, out);
 			
 			if (input_valid == 1)
 			begin
-				output_valid = 0;
+				//output_valid = 0;
 				out <= bank[row_num];
 				open_row_num <= row_num;
 				if (open_row == 1'b0)

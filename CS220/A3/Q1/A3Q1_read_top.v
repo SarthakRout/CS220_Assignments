@@ -35,61 +35,61 @@ module top_module();
 			#8 
 			row_num = 4'b1010;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1011;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1110;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1110;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b0110;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1110;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b0000;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b0010;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1101;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 			#20
 			row_num = 4'b1101;
 			input_valid = 1;
-			$display("Input:  Time: %3d, Row Number: %b", $time, row_num);
+			$display("\nInput:  Time: %3d, Row Number: %b", $time, row_num);
 			#10 input_valid = 0;
 
 		end
