@@ -15,6 +15,8 @@ module BANK(clk, input_valid, row_num, output_valid, out);
 	reg [3:0] open_row_num;				// Stores address of row which is opened.
 	reg [31:0] bank [0:15]; 			// 16 32-bit registers in a bank
 
+	reg open_row; 						// Boolean value. True if any row is open
+
 	initial
 		begin							// Initialisation of DRAM bank
 			bank[0] = 0;
@@ -35,9 +37,10 @@ module BANK(clk, input_valid, row_num, output_valid, out);
 			bank[15] = 15;	
 
 			output_valid = 1'b0;
-			out = 1'b0;					// 0 or x or z?
+			out = 1'b0;					
 			counter = 2'bxx;
-			open_row_num = 4'bxxxx;
+			open_row_num = 4'b0000;
+			open_row = 1'b0;
 		end
 
 	always @(posedge clk)
@@ -48,10 +51,11 @@ module BANK(clk, input_valid, row_num, output_valid, out);
 				output_valid = 0;
 				out <= bank[row_num];
 				open_row_num <= row_num;
-				if (open_row_num === 4'bxxxx)
+				if (open_row == 1'b0)
 				begin
 					counter <= 2'd1;
 					output_valid <= 0;
+					open_row <= 1'b1;
 				end
 				else if (row_num == open_row_num)
 				begin
