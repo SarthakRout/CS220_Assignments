@@ -13,7 +13,7 @@ module BANK(clk, input_valid, row_num, output_valid, out);
 
 	reg [1:0] counter;					// A counter register to keep track of number of cycles afte which to show output
 	reg [3:0] open_row_num;				// Stores address of row which is opened.
-	reg [31:0] bank [0:16]; 			// 16 32-bit registers in a bank
+	reg [31:0] bank [0:15]; 			// 16 32-bit registers in a bank
 
 	initial
 		begin							// Initialisation of DRAM bank
