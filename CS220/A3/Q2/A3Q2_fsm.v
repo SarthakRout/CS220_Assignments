@@ -10,30 +10,22 @@ module FSM(inp, out, clk);
 
     // init=1 when FSM just started and init=0 afterwards.
     // seq stores the sequence.
-    // counter stores clock cycle.
-    reg init, seq, counter;
+    reg init, seq;
 
     // initialise the registers.
     initial begin
         init = 1;
         seq = 0;
-        counter = 0;
         out = 1;
     end
 
     always @(posedge clk) begin
-        if (counter == 0) begin // gives input 2 clock cycle time.
-            seq <= inp;
-            if (init == 0) begin
-                out <= out & (inp ^ seq);
-            end
-            else begin
-                init <= 0;
-            end
-            counter <= 1;
+        seq <= inp;
+        if (init == 0) begin
+            out <= out & (inp ^ seq);
         end
         else begin
-            counter <= 0;
+            init <= 0;
         end
     end
 endmodule

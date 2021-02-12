@@ -15,18 +15,23 @@ module FSM_top;
     // clock with period 10 time units and 50% duty cycle.
     initial begin
         forever begin
-            clk = 1;
-            #5 clk = 0;
+            clk = 0;
             #5 clk = 1;
+            #5 clk = 0;
         end
     end
 
     // simulating input stream for 10 clock cycles.
     initial begin
-        inp = 0;
-        #20 inp = 1;
-        #20 inp = 0;
-        #20 inp = 0;
-        #20 inp = 1;
+        #3 inp = 0;
+        #10 inp = 1;
+        #10 inp = 0;
+        #10 inp = 1;
+        #10 inp = 0;
+        #10 inp = 0;
+        #10 inp = 1;
+        #10 inp = 0;
+        #10 inp = 1;
+        #10 inp = 0;
     end
 endmodule
