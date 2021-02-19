@@ -16,6 +16,11 @@ module top_module();
 			$display("Time: %3d, Input: Direction: %d Steps: %d, Output: x: %d, y : %d, ", $time, dir_in, step_in, x, y);
 		end
 
+	always @(x | y)
+		begin
+			$display("Time: %3d, Input: Direction: %d Steps: %d, Output: x: %d, y : %d, ", $time, dir_in, step_in, x, y);
+		end
+
 	initial
 		begin
 			#150 $finish;
@@ -37,55 +42,68 @@ module top_module();
 			dir_in = 2'b01;
 			step_in = 2'b01;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b11;
 			step_in = 2'b01;
 
+			$display("\n");
 			#10
 			dir_in = 2'b11;
 			step_in = 2'b01;
 
+			$display("\n");
 			#10
 			dir_in = 2'b01;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b10;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b10;
 			step_in = 2'b11;
 
+			$display("\n");
 			#10
 			dir_in = 2'b01;
 			step_in = 2'b01;
 
+			$display("\n");
 			#10
 			dir_in = 2'b00;
 			step_in = 2'b10;
 
+			$display("\n");
 			#10
 			dir_in = 2'b00;
 			step_in = 2'b10;
 
 
+			$display("\n");
 			#10
 			step_in = 2'b00;
 		end

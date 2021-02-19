@@ -11,7 +11,7 @@ module five_bit_adder_subtracter (a, b, opcode, sum, carry, overflow);
     one_bit_adder_subtracter AB1 (a[1], b[1], intermediate_carry[0], opcode, sum[1], intermediate_carry[1]);
     one_bit_adder_subtracter AB2 (a[2], b[2], intermediate_carry[1], opcode, sum[2], intermediate_carry[2]);
     one_bit_adder_subtracter AB3 (a[3], b[3], intermediate_carry[2], opcode, sum[3], intermediate_carry[3]);
-    one_bit_adder_subtracter AB7 (a[4], b[5], intermediate_carry[3], opcode, sum[4], carry);
+    one_bit_adder_subtracter AB7 (a[4], b[4], intermediate_carry[3], opcode, sum[4], carry);
 
     assign overflow = intermediate_carry[3]^carry;
 endmodule

@@ -31,10 +31,6 @@ module worm(clk, dirn, step, x, y);
 		y = 4'b0000;
 	end
 
-	always @(out_x | over_x) begin
-		$display("Time: %3d, out_x: %b, over_x: %b", $time, out_x, over_x);
-	end
-
 	always @(posedge clk) begin
 		if (dirn[1] == 1'b0) begin
 			if (over_x == 1'b1)
