@@ -2,11 +2,10 @@
 
 module microcode(input_address, output_data);
 	
-	input clk;
 	input [3:0] input_address;
-	output reg [2:0] output_data;
+	output reg [2:0] output_data; //Micro Instruction
 
-	reg [2:0] micro_code_rom[12:0];
+	reg [2:0] micro_code_rom[0:12];
 
 	initial
 		begin

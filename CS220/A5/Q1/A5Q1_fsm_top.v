@@ -10,7 +10,7 @@ module top_module();
 
 	initial
 		begin
-			 #150 $finish;
+			 #150 $finish;							// Simulating for 15 clock cycles
 		end
 
 	initial 
@@ -23,9 +23,9 @@ module top_module();
 			end
 		end
 
-	always @(posedge clk or out)
+	always @(posedge clk)
 		begin
-			$display("Time: %3d Input: %b Output: %b = %4d", $time, inp, out, out);
+			$display("Time: %3d Input: %b Output: (Current State to be Changed) %b = %4d", $time, inp, out, out);
 		end
 
 	initial
@@ -33,47 +33,61 @@ module top_module();
 			#8
 			inp = 2'b00;
 
+			//$display("\n");
 			#10
 			inp = 2'b01;
 
+			//$display("\n");
 			#10
 			inp = 2'b11;
 
+			//$display("\n");
 			#10
 			inp = 2'b10;
  
+			//$display("\n");
 			#10
 			inp = 2'b00;
 
+			//$display("\n");
 			#10
 			inp = 2'b11;
 
+			//$display("\n");
 			#10
 			inp = 2'b00;
 
+			//$display("\n");
 			#10
 			inp = 2'b01;
 
+			//$display("\n");
 			#10
 			inp = 2'b10;
 
+			//$display("\n");
 			#10
 			inp = 2'b11;
 
+			//$display("\n");
 			#10
 			inp = 2'b00;
 
+			//$display("\n");
 			#10
 			inp = 2'b10;
 
+			//$display("\n");
 			#10
 			inp = 2'b00;
 
+			//$display("\n");
 			#10
-			inp = 2'b10;
+			inp = 2'b11;
 
+			//$display("\n");
 			#10
-			inp = 2'b00;
+			inp = 2'b01;
 		end
 
 endmodule

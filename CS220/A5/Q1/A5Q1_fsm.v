@@ -8,18 +8,16 @@ module FSM(clk, inp, out);
 
 	output wire [3:0] out;
 
-	reg [3:0] current_state;
+	reg [3:0] current_state;				//Micro Program Counter
 	wire [3:0] incremented_state;
-	//reg [3:0] micro_instruction;
-	wire [2:0] branch_control;
+	wire [2:0] micro_instruction;
 
 	four_bit_incrementer state_incrementer(current_state, incremented_state);
-	microcode ROM(current_state, branch_control);
+	microcode ROM(current_state, micro_instruction);
 	reg [3:0] dispatch_rom_1[0:3];
 	reg [3:0] dispatch_rom_2[0:3];
 
 	assign out = current_state;
-	//assign decider = {branch_control, inp};
 	initial
 		begin
 			current_state = 4'b0000;
@@ -37,7 +35,8 @@ module FSM(clk, inp, out);
 
 	always @(posedge clk)
 		begin
-			case(branch_control)
+			// State Selection Multiplexer
+			case(micro_instruction)
 			3'b000:
 				current_state <= #2 incremented_state;
 			3'b001:
