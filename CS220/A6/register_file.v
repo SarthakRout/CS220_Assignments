@@ -2,8 +2,8 @@
 
 module register_file(clk, valid, read_addr_1, read_addr_2, write_addr, write_data, read_1, read_2);
 
-input clk;
-input [3:0] valid;
+input clk;									// Clock
+input [3:0] valid;        					// Indicator for which read/write operation to perform
 input [4:0] read_addr_1;
 input [4:0] read_addr_2;
 input [4:0] write_addr_1;
@@ -11,12 +11,14 @@ input [15:0] write_data;
 output reg [15:0] read_1;
 output reg [15:0] read_2;
 
-reg [15:0] REGISTER[0:31];
-reg done;
+reg [15:0] REGISTER[0:31]; 					//32 16-bit register file
+reg [1:0] read_cycles;						//Register to simulate read delay independent of clock
+reg [1:0] write_cycles;						//Register to simulate write delay independent of clock
 
 initial
 	begin
-		done = 1'b0;
+		read_cycles = 2'b0;
+		write_cycles = 2'b0;
 		REGISTER[0] = 16'b0; 
 		REGISTER[1] = 16'b0; 
 		REGISTER[2] = 16'b0; 
@@ -53,18 +55,38 @@ initial
 
 	always @(posedge clk)
 		begin
-			if (! valid[0])
+			if (read_cycles == 2'b10)
 				begin
-					// Should this be independent?
-					read_1 <= #20 REGISTER[read_addr_1]; 
+					read_1 <= REGISTER[read_addr_1];
+					read_2 <= REGISTER[read_addr_2];
+					read_cycles <= 2'b00;
 				end
-			if (! valid[1])
+			else 
 				begin
-					read_2 <= #20 REGISTER[read_addr_2];
+					case(read_cycles)
+						2'b00: read_cycles <= 2'b01;
+						2'b01: read_cycles <= 2'b10;
+					endcase
+				end
+			if (write_cycles == 2'b10)
+				begin
+					REGISTER[write_addr] <= write_data;
+					write_cycles <= 2'b00;
+				end
+			else
+				begin
+					case(write_cycles)
+						2'b00: write_cycles <= 2'b01;
+						2'b01: write_cycles <= 2'b10;
+					endcase
+				ends
+			if (! valid[0] || ! valid[1])
+				begin
+					read_cycles <= 2'b01;
 				end
 			if (! valid[2])
 				begin
-					REGISTER[write_addr] <= #20 write_data;
+					write_cycles <= 2'b01;
 				end
 		end
 
