@@ -6,7 +6,7 @@ input clk;									// Clock
 input [2:0] valid;        					// Indicator for which read/write operation to perform
 input [4:0] read_addr_1;
 input [4:0] read_addr_2;
-input [4:0] write_addr_1;
+input [4:0] write_addr;
 input [15:0] write_data;
 output reg [15:0] read_1;
 output reg [15:0] read_2;
@@ -79,7 +79,7 @@ initial
 						2'b00: write_cycles <= 2'b01;
 						2'b01: write_cycles <= 2'b10;
 					endcase
-				ends
+				end
 			if (! valid[0] || ! valid[1])
 				begin
 					read_cycles <= 2'b01;
