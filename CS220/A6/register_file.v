@@ -55,36 +55,30 @@ initial
 
 	always @(posedge clk)
 		begin
-			if (read_cycles == 2'b10)
+			if (read_cycles == 2'b10) 						// 2 clock cycles -- give read output
 				begin
 					read_1 <= REGISTER[read_addr_1];
 					read_2 <= REGISTER[read_addr_2];
 					read_cycles <= 2'b00;
 				end
-			else 
+			else if (read_cycles == 2'b01)					// 1 clock cycle -- update
 				begin
-					case(read_cycles)
-						2'b00: read_cycles <= 2'b01;
-						2'b01: read_cycles <= 2'b10;
-					endcase
+					read_cycles <= 2'b10;
 				end
-			if (write_cycles == 2'b10)
+			if (write_cycles == 2'b10)						// 2 clock cycles -- give read output
 				begin
 					REGISTER[write_addr] <= write_data;
 					write_cycles <= 2'b00;
 				end
-			else
+			else if (write_cycles == 2'b01) 				// 1 clock cycle -- update
 				begin
-					case(write_cycles)
-						2'b00: write_cycles <= 2'b01;
-						2'b01: write_cycles <= 2'b10;
-					endcase
+					write_cycles <= 2'b10
 				end
-			if (! valid[0] || ! valid[1])
+			if ( valid[0] || valid[1])						// If any read valid bit is active, set read_cycles bit
 				begin
 					read_cycles <= 2'b01;
 				end
-			if (! valid[2])
+			if (valid[2])									// If write valid bit is active, set write_cycles bit
 				begin
 					write_cycles <= 2'b01;
 				end
