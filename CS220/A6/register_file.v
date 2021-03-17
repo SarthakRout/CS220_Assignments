@@ -16,8 +16,8 @@ reg write_cycles_counter;						//Register to simulate write delay independent of
 
 initial
 	begin
-		read_cycles = 2'b0;
-		write_cycles = 2'b0;
+		read_cycles_counter = 2'b0;
+		write_cycles_counter = 2'b0;
 		REGISTER[0] = 16'b0; 
 		REGISTER[1] = 16'b0; 
 		REGISTER[2] = 16'b0; 

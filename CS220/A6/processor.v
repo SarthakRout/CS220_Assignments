@@ -23,7 +23,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
 
     initial begin
         valid = 3'b000;
-        done = 1'b0;
+        done = 1'b1;
         cycle_count = 0;
         write_data = 0;
         op1 = 0;
