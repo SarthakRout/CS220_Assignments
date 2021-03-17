@@ -10,11 +10,11 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
     output reg done;    // stores state of current instruction.
 
     reg [2:0] valid;    // enables read and write port of register file.
-    wire [15:0] read1, read2;   // stores the data read by read ports.
+    wire signed [15:0] read1, read2;   // stores the data read by read ports.
     reg [4:0] cycle_count;  // counts number of cycles since new instruction.
-    reg [15:0] op1, op2;    // operands for various operations.
-    wire [15:0] sum_sub_ans, left_shift_ans; // output of various operations.
-    reg [15:0] write_data; // stores value to be written in register file.
+    reg signed [15:0] op1, op2;    // operands for various operations.
+    wire signed [15:0] sum_sub_ans, left_shift_ans; // output of various operations.
+    reg signed [15:0] write_data; // stores value to be written in register file.
     reg opcode; // stores type of operation.
 
     register_file rfile(clk, valid, reg1, reg2, reg3, write_data, read1, read2);

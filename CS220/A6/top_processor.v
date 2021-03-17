@@ -5,7 +5,7 @@ module processor_top;
     reg clk;
     reg [2:0] instr;
     reg [4:0] reg1, reg2, reg3;
-    reg [15:0] const;
+    reg signed [15:0] const;
     wire done;
     reg [3:0] ip;
 
@@ -18,9 +18,7 @@ module processor_top;
         reg2 = 0;
         reg3 = 0;
         const = 0;
-        if(ip == 10) begin
-            #30 $finish;
-        end
+        #2000 $finish;
     end
 
     initial begin
