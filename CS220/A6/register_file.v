@@ -3,7 +3,7 @@
 module register_file(clk, valid, read_addr_1, read_addr_2, write_addr, write_data, read_1, read_2);
 
 input clk;									// Clock
-input [3:0] valid;        					// Indicator for which read/write operation to perform
+input [2:0] valid;        					// Indicator for which read/write operation to perform
 input [4:0] read_addr_1;
 input [4:0] read_addr_2;
 input [4:0] write_addr_1;
