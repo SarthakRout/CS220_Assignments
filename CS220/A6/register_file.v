@@ -72,7 +72,7 @@ initial
 				end
 			else if (write_cycles == 2'b01) 				// 1 clock cycle -- update
 				begin
-					write_cycles <= 2'b10
+					write_cycles <= 2'b10;
 				end
 			if ( valid[0] || valid[1])						// If any read valid bit is active, set read_cycles bit
 				begin
