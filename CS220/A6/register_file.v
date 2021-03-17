@@ -1,9 +1,8 @@
 // Module for Register File
-
 module register_file(clk, valid, read_addr_1, read_addr_2, write_addr, write_data, read_1, read_2);
 
-input clk;									// Clock
-input [2:0] valid;        					// Indicator for which read/write operation to perform
+input clk;										// Clock
+input [2:0] valid;        						// Indicator for which read/write operation to perform
 input [4:0] read_addr_1;
 input [4:0] read_addr_2;
 input [4:0] write_addr;
@@ -11,9 +10,9 @@ input [15:0] write_data;
 output reg [15:0] read_1;
 output reg [15:0] read_2;
 
-reg [15:0] REGISTER[0:31]; 					//32 16-bit register file
-reg [1:0] read_cycles;						//Register to simulate read delay independent of clock
-reg [1:0] write_cycles;						//Register to simulate write delay independent of clock
+reg [15:0] REGISTER[0:31]; 						//32 16-bit register file
+reg read_cycles_counter;						//Register to simulate read delay independent of clock
+reg write_cycles_counter;						//Register to simulate write delay independent of clock
 
 initial
 	begin
@@ -55,32 +54,24 @@ initial
 
 	always @(posedge clk)
 		begin
-			if (read_cycles == 2'b10) 						// 2 clock cycles -- give read output
+			if (read_cycles_counter == 1'b1) 						// complete by 2 clock cycles -- give read output
 				begin
-					read_1 <= REGISTER[read_addr_1];
-					read_2 <= REGISTER[read_addr_2];
-					read_cycles <= 2'b00;
+					read_1 <=  REGISTER[read_addr_1];
+					read_2 <=  REGISTER[read_addr_2];
+					read_cycles_counter <= 1'b0;
 				end
-			else if (read_cycles == 2'b01)					// 1 clock cycle -- update
+			if (write_cycles_counter == 1'b1)						// complete by 2 clock cycles -- give read output
 				begin
-					read_cycles <= 2'b10;
+					REGISTER[write_addr] <=  write_data;
+					write_cycles_counter <= 1'b0;
 				end
-			if (write_cycles == 2'b10)						// 2 clock cycles -- give read output
+			if ( valid[0] || valid[1])								// If any read valid bit is active, set read_cycles bit
 				begin
-					REGISTER[write_addr] <= write_data;
-					write_cycles <= 2'b00;
+					read_cycles_counter <= 1'b1;
 				end
-			else if (write_cycles == 2'b01) 				// 1 clock cycle -- update
+			if (valid[2])											// If write valid bit is active, set write_cycles bit
 				begin
-					write_cycles <= 2'b10;
-				end
-			if ( valid[0] || valid[1])						// If any read valid bit is active, set read_cycles bit
-				begin
-					read_cycles <= 2'b01;
-				end
-			if (valid[2])									// If write valid bit is active, set write_cycles bit
-				begin
-					write_cycles <= 2'b01;
+					write_cycles_counter <= 1'b1;
 				end
 		end
 
