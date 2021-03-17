@@ -13,12 +13,12 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
     wire [15:0] read1, read2;   // stores the data read by read ports.
     reg [4:0] cycle_count;  // counts number of cycles since new instruction.
     reg [15:0] op1, op2;    // operands for various operations.
-    wire [15:0] sum, diff, left_shift_ans; // output of various operations.
+    wire [15:0] sum_sub_ans, left_shift_ans; // output of various operations.
     reg [15:0] write_data; // stores value to be written in register file.
+    reg opcode; // stores type of operation.
 
     register_file rfile(clk, valid, reg1, reg2, reg3, write_data, read1, read2);
-    // add_sub add(op1,op2,0,sum);
-    // add_sub sub(op1,op2,1,diff);
+    add_sub AS(op1,op2,opcode,sum_sub_ans);
     assign left_shift_ans = op1 << const;
 
     initial begin
@@ -28,6 +28,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
         write_data = 0;
         op1 = 0;
         op2 = 0;
+        opcode = 0;
     end
 
     always @(posedge clk) begin
@@ -37,27 +38,33 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     valid <= 3'b100;
                     write_data <= const;
                 end
+                if (cycle_count == 1) begin
+                    valid <= 3'b000;
+                end
                 if(cycle_count == 2) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b001) begin
                 if (cycle_count == 0) begin
                     valid <= 3'b001;
                 end
+                if (cycle_count == 1) begin
+                    valid <= 3'b000;
+                end
                 if (cycle_count == 2) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b010) begin
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
+                if (cycle_count == 1) begin
+                    valid <= 3'b000;
+                end
                 if (cycle_count == 2) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b011) begin                
@@ -65,9 +72,11 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     valid <= 3'b101;
                     write_data <= const;
                 end
+                if (cycle_count == 1) begin
+                    valid <= 3'b000;
+                end
                 if (cycle_count == 2) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b100) begin
@@ -75,57 +84,71 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     valid <= 3'b111;
                     write_data <= const;
                 end
+                if (cycle_count == 1) begin
+                    valid <= 3'b000;
+                end
                 if (cycle_count == 2) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b101) begin
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 1) begin
                     valid <= 3'b000;
+                end
+                if (cycle_count == 2) begin
                     op1 <= read1;
                     op2 <= read2;
+                    opcode <= 1'b0;
                 end
                 if (cycle_count == 18) begin
                     op1 <= 0;
                     op2 <= 0;
-                    write_data <= sum;
+                    write_data <= sum_sub_ans;
                     valid <= 3'b100;
+                end
+                if (cycle_count == 19) begin
+                    valid <= 3'b000;
                 end
                 if(cycle_count == 20) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b110) begin
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 1) begin
                     valid <= 3'b000;
+                end
+                if (cycle_count == 2) begin
                     op1 <= read1;
                     op2 <= read2;
+                    opcode <= 1'b1;
                 end
                 if (cycle_count == 18) begin
                     op1 <= 0;
                     op2 <= 0;
-                    write_data <= diff;
+                    write_data <= sum_sub_ans;
                     valid <= 3'b100;
+                end
+                if (cycle_count == 19) begin
+                    valid <= 3'b000;
                 end
                 if(cycle_count == 20) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
             else if(instr == 3'b111) begin
                 if (cycle_count == 0) begin
                     valid <= 3'b001;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 1) begin
                     valid <= 3'b000;
+                end
+                if (cycle_count == 2) begin
                     op1 <= read1;
                 end
                 if (cycle_count == 18) begin
@@ -133,9 +156,11 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     write_data <= left_shift_ans;
                     valid <= 3'b100;
                 end
+                if (cycle_count == 19) begin
+                    valid <= 3'b000;
+                end
                 if(cycle_count == 20) begin
                     done <= 1'b1;
-                    valid <= 3'b000;
                 end
             end
 
