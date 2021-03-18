@@ -98,21 +98,21 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                 if (cycle_count == 1) begin
                     valid <= 3'b000;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 3) begin
                     op1 <= read1;
                     op2 <= read2;
                     opcode <= 1'b0;
                 end
-                if (cycle_count == 18) begin
+                if (cycle_count == 19) begin
+                    write_data <= sum_sub_ans;
                     op1 <= 0;
                     op2 <= 0;
-                    write_data <= sum_sub_ans;
                     valid <= 3'b100;
                 end
-                if (cycle_count == 19) begin
+                if (cycle_count == 20) begin
                     valid <= 3'b000;
                 end
-                if(cycle_count == 20) begin
+                if(cycle_count == 21) begin
                     done <= 1'b1;
                 end
             end
@@ -123,21 +123,21 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                 if (cycle_count == 1) begin
                     valid <= 3'b000;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 3) begin
                     op1 <= read1;
                     op2 <= read2;
                     opcode <= 1'b1;
                 end
-                if (cycle_count == 18) begin
+                if (cycle_count == 19) begin
+                    write_data <= sum_sub_ans;
                     op1 <= 0;
                     op2 <= 0;
-                    write_data <= sum_sub_ans;
                     valid <= 3'b100;
                 end
-                if (cycle_count == 19) begin
+                if (cycle_count == 20) begin
                     valid <= 3'b000;
                 end
-                if(cycle_count == 20) begin
+                if(cycle_count == 21) begin
                     done <= 1'b1;
                 end
             end
@@ -148,18 +148,18 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                 if (cycle_count == 1) begin
                     valid <= 3'b000;
                 end
-                if (cycle_count == 2) begin
+                if (cycle_count == 3) begin
                     op1 <= read1;
                 end
-                if (cycle_count == 18) begin
+                if (cycle_count == 19) begin
                     op1 <= 0;
                     write_data <= left_shift_ans;
                     valid <= 3'b100;
                 end
-                if (cycle_count == 19) begin
+                if (cycle_count == 20) begin
                     valid <= 3'b000;
                 end
-                if(cycle_count == 20) begin
+                if(cycle_count == 21) begin
                     done <= 1'b1;
                 end
             end
