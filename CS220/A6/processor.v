@@ -1,21 +1,21 @@
 // Instruction processor module over register file.
 
 module processor(clk, instr, reg1, reg2, reg3, const, done);
-    input clk;  // clock
-    input [2:0] instr;  // 3-bit instructions
-    input [4:0] reg1, reg2, reg3;   // 5-bit register numbers
+    input clk;                                              // clock
+    input [2:0] instr;                                      // 3-bit instructions
+    input [4:0] reg1, reg2, reg3;                           // 5-bit register numbers
     // reg1, reg2 store reading register addresses and reg3 stores writing register address.
-    input [15:0] const; // 16-bit constant
+    input [15:0] const;                                     // 16-bit constant
 
-    output reg done;    // stores state of current instruction.
+    output reg done;                                        // stores state of current instruction.
 
-    reg [2:0] valid;    // enables read and write port of register file.
-    wire signed [15:0] read1, read2;   // stores the data read by read ports.
-    reg [4:0] cycle_count;  // counts number of cycles since new instruction.
-    reg signed [15:0] op1, op2;    // operands for various operations.
-    wire signed [15:0] sum_sub_ans, left_shift_ans; // output of various operations.
-    reg signed [15:0] write_data; // stores value to be written in register file.
-    reg opcode; // stores type of operation.
+    reg [2:0] valid;                                        // enables read and write port of register file.
+    wire signed [15:0] read1, read2;                        // stores the data read by read ports.
+    reg [4:0] cycle_count;                                  // counts number of cycles since new instruction.
+    reg signed [15:0] op1, op2;                             // operands for various operations.
+    wire signed [15:0] sum_sub_ans, left_shift_ans;         // output of various operations.
+    reg signed [15:0] write_data;                           // stores value to be written in register file.
+    reg opcode;                                             // stores type of operation.
 
     register_file rfile(clk, valid, reg1, reg2, reg3, write_data, read1, read2);
     add_sub AS(op1,op2,opcode,sum_sub_ans);
