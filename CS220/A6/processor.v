@@ -172,7 +172,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
             write_data <= 0;
 
             if(instr == 3'b000) begin
-                $display("executed instruction 000");
+                //$display("executed instruction 000");
             end
             else if(instr == 3'b001) begin
                 $display("address: %d, value: %d", reg1, read1);
