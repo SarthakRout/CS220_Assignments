@@ -18,10 +18,10 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
     reg opcode;                                             // stores type of operation.
 
     register_file rfile(clk, valid, reg1, reg2, reg3, write_data, read1, read2);
-    add_sub AS(op1,op2,opcode,sum_sub_ans);
-    assign left_shift_ans = op1 << const;
+    add_sub AS(op1,op2,opcode,sum_sub_ans);					// Adder_Subtractor
+    assign left_shift_ans = op1 << const;					// To shift left
 
-    initial begin
+    initial begin											// Initialisation of registers
         valid = 3'b000;
         done = 1'b1;
         cycle_count = 0;
@@ -33,7 +33,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
 
     always @(posedge clk) begin
         if(done == 1'b0) begin
-            if(instr == 3'b000) begin
+            if(instr == 3'b000) begin						// No read, one write
                 if(cycle_count == 0) begin
                     valid <= 3'b100;
                     write_data <= const;
@@ -45,7 +45,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b001) begin
+            else if(instr == 3'b001) begin					// One read, no write
                 if (cycle_count == 0) begin
                     valid <= 3'b001;
                 end
@@ -56,7 +56,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b010) begin
+            else if(instr == 3'b010) begin					// Two reads, no write
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
@@ -67,7 +67,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b011) begin                
+            else if(instr == 3'b011) begin  				// One read, one write              
                 if (cycle_count == 0) begin
                     valid <= 3'b101;
                     write_data <= const;
@@ -79,7 +79,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b100) begin
+            else if(instr == 3'b100) begin					// Two reads, one write
                 if (cycle_count == 0) begin
                     valid <= 3'b111;
                     write_data <= const;
@@ -91,7 +91,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b101) begin
+            else if(instr == 3'b101) begin					// Two reads, add two read values, write the result, ignore overflow
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
@@ -116,7 +116,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b110) begin
+            else if(instr == 3'b110) begin					// Two reads, subtract the second read value from the first value, write the result, ignore overflow
                 if (cycle_count == 0) begin
                     valid <= 3'b011;
                 end
@@ -141,7 +141,7 @@ module processor(clk, instr, reg1, reg2, reg3, const, done);
                     done <= 1'b1;
                 end
             end
-            else if(instr == 3'b111) begin
+            else if(instr == 3'b111) begin					// One read, shift the read value left, write the result
                 if (cycle_count == 0) begin
                     valid <= 3'b001;
                 end

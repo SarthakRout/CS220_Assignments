@@ -3,19 +3,19 @@ module register_file(clk, valid, read_addr_1, read_addr_2, write_addr, write_dat
 
 input clk;										// Clock
 input [2:0] valid;        						// Indicator for which read/write operation to perform
-input [4:0] read_addr_1;
-input [4:0] read_addr_2;
-input [4:0] write_addr;
-input [15:0] write_data;
-output reg [15:0] read_1;
-output reg [15:0] read_2;
+input [4:0] read_addr_1;						// 5 bit 1st source register address
+input [4:0] read_addr_2;						// 5 bit 2nd source register address
+input [4:0] write_addr;							// 5 bit destination register address
+input [15:0] write_data;						// 16 bit data to write in a register
+output reg [15:0] read_1;						// 16 bit data read from the 1st register
+output reg [15:0] read_2;						// 16 bit data read from the 2nd register
 
 reg [15:0] REGISTER[0:31]; 						//32 16-bit register file
 reg read_cycles_counter;						//Register to simulate read delay independent of clock
 reg write_cycles_counter;						//Register to simulate write delay independent of clock
 
-initial
-	begin
+initial											// Initialisation of register file
+	begin				
 		read_cycles_counter = 2'b0;
 		write_cycles_counter = 2'b0;
 		REGISTER[0] = 16'b0; 

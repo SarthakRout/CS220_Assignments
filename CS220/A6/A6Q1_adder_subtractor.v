@@ -1,11 +1,11 @@
 // module for 16 bit adder/subtracter
 module add_sub (a, b, opcode, sum);
-    input [15:0] a, b;   // operands
-    input opcode;       // operation code
-    output wire [15:0] sum;  // output of operation
-    wire carry, overflow;    // Ignored carry over and overflow
+    input [15:0] a, b;   								// operands
+    input opcode;       								// operation code
+    output wire [15:0] sum;  							// output of operation
+    wire carry, overflow;    							// Ignored carry over and overflow
 
-    wire [14:0] intermediate_carry;  // required dummy variable.
+    wire [14:0] intermediate_carry;  					// required dummy variable.
 
     one_bit_adder_subtracter AB0 (a[0], b[0], opcode, opcode, sum[0], intermediate_carry[0]);
     one_bit_adder_subtracter AB1 (a[1], b[1], intermediate_carry[0], opcode, sum[1], intermediate_carry[1]);
