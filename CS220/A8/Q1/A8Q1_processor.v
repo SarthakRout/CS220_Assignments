@@ -10,7 +10,7 @@ module processor();
 
     reg [2:0] state;            // stosum states of instruction execution
     reg [1:0] state_counter;    // counts cycles during a state
-    reg [7:0] ip;               // instruction pointer
+    reg signed [7:0] ip;               // instruction pointer
     wire [31:0] instruction;    // instruction recieved from module
     reg [31:0] instr;           // stosum current instruction
     reg instr_valid;            // stosum whether instruction is valid or not
@@ -80,7 +80,6 @@ module processor();
         state_counter = 0;
         ip = 12;
         valid = 3'b000;
-        #5000 $finish;
     end
 
     initial begin							// Implementing clock
@@ -172,7 +171,7 @@ module processor();
                 // beq
                 else if(opcode == 6'b000100) begin
                     if(eq == 1) begin
-                        ip <= `PROP_DELAY immediate[7:0];
+                        ip <= `PROP_DELAY ip-1 + $signed(immediate[7:0]);
                         instr_valid <= `PROP_DELAY 1'b0;
                     end
                 end
@@ -184,7 +183,7 @@ module processor();
                 // bne
                 else if(opcode == 6'b000101) begin
                     if(eq == 0) begin
-                        ip <= `PROP_DELAY immediate[7:0];
+                        ip <= `PROP_DELAY ip-1 + $signed(immediate[7:0]);
                         instr_valid <= `PROP_DELAY 1'b0;
                     end
                 end
@@ -194,7 +193,7 @@ module processor();
                 // jal
                 if(opcode == 6'b000011) begin
                     ip <= `PROP_DELAY immediate[7:0];
-                    write_data <= `PROP_DELAY ip+1;
+                    write_data <= `PROP_DELAY ip;
                     instr_valid <= `PROP_DELAY 1'b1;
                 end
             end
@@ -207,7 +206,7 @@ module processor();
                     write_addr <= `PROP_DELAY rt;
                     write_data <= `PROP_DELAY data_out;
                     state_counter <= `PROP_DELAY state_counter+1;
-                    $display("data_out: %d\n", data_out);
+                    // $display("data_out: %d\n", data_out);
                 end
                 else if(state_counter == 1) begin
                     valid <= `PROP_DELAY 3'b000;
@@ -249,7 +248,7 @@ module processor();
                 state_counter <= `PROP_DELAY state_counter + 1;
             end
             if(state_counter == 1) begin
-                $display("time: %d, ip: %d, instr: %b, opcode: %d, op1: %d, op2: %d, sum: %d", $time, ip, instr, opcode, op1, op2, sum);
+                // $display("time: %d, ip: %d, instr: %b, opcode: %d, op1: %d, op2: %d, sum: %d", $time, ip, instr, opcode, op1, op2, sum);
                 valid <= 3'b000;
                 state_counter <= `PROP_DELAY 0;
                 if(ip == `MAX_PC) begin
