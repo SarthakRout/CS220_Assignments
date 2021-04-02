@@ -4,7 +4,7 @@ module memory(prog_counter, instruction);
 
 	reg [31:0] REGISTER[0:13];									// 14 32-bit memory register
 
-	input [3:0] prog_counter; 									// 4 bit program counter as input
+	input [7:0] prog_counter; 									// 4 bit program counter as input
 	output wire [31:0] instruction;								// 32 bit instruction as output
 
 	initial
