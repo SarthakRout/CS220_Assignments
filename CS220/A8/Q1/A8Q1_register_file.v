@@ -35,7 +35,7 @@ initial											// Initialisation of register file
 		REGISTER[13] = 8'b0; 
 		REGISTER[14] = 8'b0; 
 		REGISTER[15] = 8'b0; 
-		REGISTER[8] = 8'b0; 
+		REGISTER[16] = 8'b0; 
 		REGISTER[17] = 8'b0; 
 		REGISTER[18] = 8'b0; 
 		REGISTER[19] = 8'b0; 

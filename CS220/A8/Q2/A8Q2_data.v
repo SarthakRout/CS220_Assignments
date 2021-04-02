@@ -11,9 +11,9 @@ output wire [7:0] data_out;
 initial
 	begin
 		// To be initialised by the TA
-		data[0] = 8'b00000000;
-		data[1] = 8'b00000000;
-		data[2] = 8'b00000000;
+		data[0] = 8'b11110110;
+		data[1] = 8'b00010100;
+		data[2] = 8'b00000010;
 	end
 
 	assign data_out = data[data_index];

@@ -1,5 +1,5 @@
 `define OUTPUT_REG 4    // register containing final answer.
-`define PROP_DELAY #2   // propositional delay
+`define PROP_DELAY #2   // propagation delay
 `define MAX_PC 11        // total number of instructions
 
 // module for processor
@@ -116,7 +116,7 @@ module processor();
                     read_addr_2 <= `PROP_DELAY rt;
                 end
                 if(instr_type == 1) begin
-                    valid <= `PROP_DELAY 3'b010;
+                    valid <= `PROP_DELAY 3'b011;
                     read_addr_1 <= `PROP_DELAY rs;
                     read_addr_2 <= `PROP_DELAY rt;
                 end
@@ -270,7 +270,7 @@ module processor();
                 state_counter <= `PROP_DELAY state_counter + 1;
             end
             if(state_counter == 2) begin
-                $display("time: %d, answer: %d", $time, read_1);
+                $display("time: %d, answer: %d", $time, $signed(read_1));
                 $finish;
             end
         end

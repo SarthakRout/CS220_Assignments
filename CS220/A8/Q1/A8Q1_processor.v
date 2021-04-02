@@ -1,5 +1,5 @@
 `define OUTPUT_REG 2    // register containing final answer.
-`define PROP_DELAY #2   // propositional delay
+`define PROP_DELAY #2   // propagation delay
 `define MAX_PC 14        // total number of instructions
 
 // module for processor
@@ -97,6 +97,7 @@ module processor();
             state <= `PROP_DELAY state + 1;
         end
         if(state==1) begin
+        	//$display("Ins: %d", ip-1);
             if(opcode == 0) begin
                 instr_type <= 0;
             end
@@ -116,7 +117,7 @@ module processor();
                     read_addr_2 <= `PROP_DELAY rt;
                 end
                 if(instr_type == 1) begin
-                    valid <= `PROP_DELAY 3'b010;
+                    valid <= `PROP_DELAY 3'b011;
                     read_addr_1 <= `PROP_DELAY rs;
                     read_addr_2 <= `PROP_DELAY rt;
                 end
@@ -137,6 +138,7 @@ module processor();
                     end
                     else if((opcode == 6'b000100) || (opcode == 6'b000101)) begin
                         op2 <= `PROP_DELAY read_2;
+                        //$display("Opcode: %b, Op1: %d Op2 set: %d addr: %d", opcode, read_1, read_2, read_addr_2);
                     end
                 end
                 state_counter <= `PROP_DELAY 0;
@@ -170,9 +172,11 @@ module processor();
                 end
                 // beq
                 else if(opcode == 6'b000100) begin
+                	//$display("Ops: %d %d", op1, op2);
                     if(eq == 1) begin
                         ip <= `PROP_DELAY ip-1 + $signed(immediate[7:0]);
                         instr_valid <= `PROP_DELAY 1'b0;
+                        //$display("Hello %d %d", ip, $signed(immediate[7:0]));
                     end
                 end
                 // lw
@@ -270,7 +274,7 @@ module processor();
                 state_counter <= `PROP_DELAY state_counter + 1;
             end
             if(state_counter == 2) begin
-                $display("time: %d, answer: %d", $time, read_1);
+                $display("time: %d, answer: %d", $time, $signed(read_1));
                 $finish;
             end
         end

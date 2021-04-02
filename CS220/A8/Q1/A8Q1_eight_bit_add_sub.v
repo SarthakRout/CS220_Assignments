@@ -1,4 +1,4 @@
-// module for 16 bit adder/subtracter
+// module for 8 bit adder/subtracter
 module eight_bit_add_sub (a, b, opcode, sum);
     input [7:0] a, b;   								// operands
     input opcode;       								// operation code
