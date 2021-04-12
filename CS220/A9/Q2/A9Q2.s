@@ -16,8 +16,8 @@ main:   li $v0, 4       		# Syscall 4 (print_str)
         li $v0, 5 				# Syscall 5 (read int) 
         syscall					# Read input n
 
-        addiu $s0, $v0, 0 		# Copy integer n to $t0
-        addiu $s1, $v0, 0		# Copy integer n to $t1
+        addiu $s0, $v0, 0 		# Copy integer n to $s0
+        addiu $s1, $v0, 0		# Copy integer n to $s1
 
         addiu $a1, $s1, 0 		# Argument: n
 
