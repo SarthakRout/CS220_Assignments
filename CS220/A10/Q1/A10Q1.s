@@ -113,7 +113,7 @@ neq:	blt $t7, $s6, lt		# Branch if less than
 		
 		## Greater than case ar[mid] > k
 
-		addiu $a2, $t7, -1		# h = mid - 1
+		addiu $a2, $t4, -1		# h = mid - 1
 		addiu $a0, $a0, 1		# Increment function counter
 
 		jal search
@@ -124,7 +124,7 @@ neq:	blt $t7, $s6, lt		# Branch if less than
 
 lt:		## Less than case ar[mid] < k
 
-		addiu $a1, $t7, 1		# l = mid +  1
+		addiu $a1, $t4, 1		# l = mid +  1
 		addiu $a0, $a0, 1		# Increment function counter
 
 		jal search
