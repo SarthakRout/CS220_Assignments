@@ -22,7 +22,7 @@ module top;
 	always @(negedge clk) begin
         if(done == 1)
         begin
-            $display("time = %4d, a = %d, b = %d, quotient = %d, remainder = %d, count_add = %d, count_sub = %d\n", $time, a, b, quotient, remainder, count_add, count_sub);
+            $display("time = %4d, a = %d, b = %d, quotient = %d, remainder = %d, counts: add = %d, sub = %d\n", $time, a, b, quotient, remainder, count_add, count_sub);
         end
     end
 
@@ -37,7 +37,6 @@ module top;
     end
 
      always @(negedge clk) begin
-    	//$display("HEre, %d, %d", $time, done);
         if (done == 1) begin
             case (counter)
                 0: begin
@@ -105,6 +104,12 @@ module top;
                 	b <= 0;
                 	len_a <= 1;
                 	len_b <= 1;
+                end
+                11: begin
+                    a <= 10;
+                    b <= 0;
+                    len_a <= 4;
+                    len_b <= 1;
                 end
                 default: $finish;
             endcase
