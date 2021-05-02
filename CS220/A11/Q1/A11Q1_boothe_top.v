@@ -7,8 +7,10 @@ module boothe_multiplier_top;
 
     wire signed [63:0] prod;      // product
     wire done;      // done signal
+    wire [4:0] add_op;      // no. of add operations
+    wire [4:0] sub_op;      // no. of sub operations
 
-    boothe_multiplier multiplier(clk, new_inp, a, b, prod, done);
+    boothe_multiplier multiplier(clk, new_inp, a, b, prod, add_op, sub_op, done);
 
     reg [3:0] counter;
 
@@ -20,7 +22,7 @@ module boothe_multiplier_top;
     always @(negedge clk) begin
         if(done == 1)
         begin
-            $display("time = %d, a = %d, b = %d, a*b = %d", $time, a, b, prod);
+            $display("time = %d, a = %d, b = %d, a*b = %d\nNo. of addition operations = %d\nNo. of subtraction operations = %d\n", $time, a, b, prod, add_op, sub_op);
         end
     end
 

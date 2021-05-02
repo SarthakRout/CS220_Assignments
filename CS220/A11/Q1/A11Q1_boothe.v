@@ -1,4 +1,4 @@
-module boothe_multiplier (clk, new_inp, m1, m2, prod, done);
+module boothe_multiplier (clk, new_inp, m1, m2, prod, add_op, sub_op, done);
 
     // inputs
     input clk;
@@ -8,6 +8,8 @@ module boothe_multiplier (clk, new_inp, m1, m2, prod, done);
     // outputs
     output reg done;
     output reg signed [63:0] prod;
+    output reg [4:0] add_op;
+    output reg [4:0] sub_op;
 
     reg [5:0] counter;
     reg sub_counter;
@@ -26,6 +28,8 @@ module boothe_multiplier (clk, new_inp, m1, m2, prod, done);
         a <= 0;
         prod <= 0;
         sub_counter <= 0;
+        add_op <= 0;
+        sub_op <= 0;
     end
 
     always @(posedge clk) begin
@@ -36,6 +40,8 @@ module boothe_multiplier (clk, new_inp, m1, m2, prod, done);
             b_ <= 0;
             prod <= 0;
             done <= 0;
+            add_op <= 0;
+            sub_op <= 0;
         end
         
         if (done == 0) begin
@@ -47,9 +53,11 @@ module boothe_multiplier (clk, new_inp, m1, m2, prod, done);
                 if (sub_counter == 0) begin
                     if(b_ == 0 && b[0] == 1) begin
                         prod <= prod - a;
+                        sub_op <= sub_op + 1;
                     end
                     else if(b_ == 1 && b[0] == 0) begin
                         prod <= prod + a;
+                        add_op <= add_op + 1;
                     end
                     sub_counter <= 1;
                 end
